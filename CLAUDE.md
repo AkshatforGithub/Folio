@@ -35,12 +35,14 @@ Define a small "collector" interface that returns normalized run records, with a
 - Credentials: the n8n API key, Groq key, and alert tokens come from environment variables. Keep .env out of git, commit a .env.example, and never print secret values in logs or output.
 
 ## Suggested build order
-1. Skeleton: docker compose (Postgres, backend), FastAPI health endpoint, Next.js app, env handling.
+1. Skeleton: docker compose (Postgres, backend), FastAPI health endpoint, Next.js app, env handling. **[COMPLETE]**
 2. Data model and polling collector against a real n8n (a local docker n8n is fine), with a seed workflow that fails on demand (webhook to an HTTP request that can return an error).
 3. Health metrics endpoints and the dashboard pages.
 4. Alerting with deduplication and recovery notices.
 5. LLM failure summaries with fingerprint caching.
 6. Auth, webhook collector, missed-run rule, README with architecture diagram and a demo script.
+
+After Phase 1: All core services (Postgres, FastAPI, Next.js) are running via docker compose. The backend `/health` endpoint is operational, and the frontend dashboard homepage is accessible. Proceed to Phase 2 for the data model and polling collector.
 
 After each step, state how to run it and what to expect, and add a short explanation of the main design choices made in that step. Keep tests focused on the logic that can silently go wrong: idempotent ingestion, metric calculations, alert deduplication.
 
